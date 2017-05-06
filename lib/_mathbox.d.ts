@@ -15,14 +15,32 @@ interface MathBoxOptions {
   camera: MathBoxOptionsCamera;
 }
 
-interface CartesianOptions {
+interface CartesianArgs {
   range: Array<Array<number>>;
   scale: Array<number>;
 }
 
-interface AxisOptions {
+interface AxisArgs {
   axis: number;
   color: string;
+  width: number;
+  start: boolean;
+  end: boolean;
+}
+
+interface IntervalArgs {
+  width: number;
+  expr: Function;
+  items: number;
+  channels: number;
+}
+
+interface LineArgs {
+  color: string;
+  width: number;
+  size: number;
+  start: boolean;
+  end: boolean;
 }
 
 declare function mathBox(options: MathBoxOptions): MathBoxAPI;
@@ -30,8 +48,10 @@ declare function mathBox(options: MathBoxOptions): MathBoxAPI;
 declare class MathBoxAPI {
   three: ThreeBootstrap;
 
-  cartesian(options: CartesianOptions): MathBoxAPI;
-  axis(options: AxisOptions): MathBoxAPI;
+  cartesian(args: CartesianArgs): MathBoxAPI;
+  axis(args: AxisArgs): MathBoxAPI;
+  interval(args: IntervalArgs): MathBoxAPI;
+  line(args: LineArgs): MathBoxAPI;
 }
 
 declare class ThreeBootstrap {

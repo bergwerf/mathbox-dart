@@ -1,3 +1,7 @@
+// Copyright (c) 2017, Herman Bergwerf. All rights reserved.
+// Use of this source code is governed by a MIT-style license
+// that can be found in the LICENSE file.
+
 @JS('window')
 library lib._mathbox;
 
@@ -42,22 +46,61 @@ abstract class MathBoxOptions {
 
 @anonymous
 @JS()
-abstract class CartesianOptions {
+abstract class CartesianArgs {
   external List<List<num>> get range;
   external set range(List<List<num>> v);
   external List<num> get scale;
   external set scale(List<num> v);
-  external factory CartesianOptions({List<List<num>> range, List<num> scale});
+  external factory CartesianArgs({List<List<num>> range, List<num> scale});
 }
 
 @anonymous
 @JS()
-abstract class AxisOptions {
+abstract class AxisArgs {
   external num get axis;
   external set axis(num v);
   external String get color;
   external set color(String v);
-  external factory AxisOptions({num axis, String color});
+  external num get width;
+  external set width(num v);
+  external bool get start;
+  external set start(bool v);
+  external bool get end;
+  external set end(bool v);
+  external factory AxisArgs(
+      {num axis, String color, num width, bool start, bool end});
+}
+
+@anonymous
+@JS()
+abstract class IntervalArgs {
+  external num get width;
+  external set width(num v);
+  external Function get expr;
+  external set expr(Function v);
+  external num get items;
+  external set items(num v);
+  external num get channels;
+  external set channels(num v);
+  external factory IntervalArgs(
+      {num width, Function expr, num items, num channels});
+}
+
+@anonymous
+@JS()
+abstract class LineArgs {
+  external String get color;
+  external set color(String v);
+  external num get width;
+  external set width(num v);
+  external num get size;
+  external set size(num v);
+  external bool get start;
+  external set start(bool v);
+  external bool get end;
+  external set end(bool v);
+  external factory LineArgs(
+      {String color, num width, num size, bool start, bool end});
 }
 
 @JS()
@@ -69,8 +112,10 @@ class MathBoxAPI {
   MathBoxAPI.fakeConstructor$();
   external ThreeBootstrap get three;
   external set three(ThreeBootstrap v);
-  external MathBoxAPI cartesian(CartesianOptions options);
-  external MathBoxAPI axis(AxisOptions options);
+  external MathBoxAPI cartesian(CartesianArgs args);
+  external MathBoxAPI axis(AxisArgs args);
+  external MathBoxAPI interval(IntervalArgs args);
+  external MathBoxAPI line(LineArgs args);
 }
 
 @JS()
@@ -82,4 +127,3 @@ class ThreeBootstrap {
   external WebGLRenderer get renderer;
   external set renderer(WebGLRenderer v);
 }
-

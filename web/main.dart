@@ -15,19 +15,34 @@ void main() {
       cameraFov: 45);
   mathbox.three.renderer.setClearColor('white');
   mathbox.three.camera.position
-    ..setX(-.15)
-    ..setY(.15)
-    ..setZ(3.6);
+    ..setX(2.3)
+    ..setY(1)
+    ..setZ(2);
 
-  mathbox
-    ..cartesian(
-      range: [
-        [-2, 2],
-        [-1, 1],
-        [-1, 1]
-      ],
-      scale: [2, 1, 1],
-    )
-    ..axis(axis: 1, color: 'red')
-    ..axis(axis: 2, color: 'green');
+  final view = mathbox.cartesian(range: [
+    [-6, 6],
+    [-1, 1],
+    [-1, 1]
+  ], scale: new List.from([6, 1, 1]));
+
+  view
+    ..axis(width: 5, start: true, end: true)
+    ..interval(
+        width: 128,
+        expr: [
+          'var theta = x + time',
+          'var a = Math.cos(theta)',
+          'var b = Math.sin(theta)',
+          'emit(x, a, b)',
+          'emit(x, -a, -b)'
+        ].join(';'),
+        items: 2,
+        channels: 3)
+    ..line(
+      color: 'red',
+      width: 10,
+      size: 2.5,
+      start: true,
+      end: true,
+    );
 }

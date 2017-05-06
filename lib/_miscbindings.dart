@@ -9,3 +9,6 @@ import 'package:js/js.dart';
 
 @JS('THREE.OrbitControls')
 external Object get threeOrbitControls;
+
+@JS('eval')
+external Object eval(String js);

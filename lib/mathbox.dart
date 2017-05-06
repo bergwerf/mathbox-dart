@@ -8,7 +8,8 @@ import 'dart:html';
 
 import '_mathbox.dart';
 
-export '_miscbindings.dart';
+import '_miscbindings.dart';
+export '_miscbindings.dart' show threeOrbitControls;
 
 class MathBox {
   final MathBoxAPI _api;
@@ -29,11 +30,26 @@ class MathBox {
 
   ThreeBootstrap get three => _api.three;
 
-  void cartesian({List<List<num>> range, List<num> scale}) {
-    _api.cartesian(new CartesianOptions(range: range, scale: scale));
+  MathBox cartesian({List<List<num>> range, List<num> scale}) {
+    return new MathBox._(
+        _api.cartesian(new CartesianArgs(range: range, scale: scale)));
   }
 
-  void axis({int axis, String color}) {
-    _api.axis(new AxisOptions(axis: axis, color: color));
+  MathBox axis({int axis, String color, num width, bool start, bool end}) {
+    return new MathBox._(_api.axis(new AxisArgs(
+        axis: axis, color: color, width: width, start: start, end: end)));
+  }
+
+  MathBox interval({int width, String expr, int items, int channels}) {
+    return new MathBox._(_api.interval(new IntervalArgs(
+        width: width,
+        expr: eval('___tmp = function (emit, x, i, time) { $expr }'),
+        items: items,
+        channels: channels)));
+  }
+
+  MathBox line({String color, num width, num size, bool start, bool end}) {
+    return new MathBox._(_api.line(new LineArgs(
+        color: color, width: width, size: size, start: start, end: end)));
   }
 }
