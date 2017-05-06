@@ -6,3 +6,7 @@ homepage:     https://github.com/eqdb/mathbox
 environment:
   sdk:        '>=1.8.0 <2.0.0'
 dependencies:
+  js:         ^0.6.1
+  browser:    ^0.10.0+2
+  threejs_facade:
+    git: https://github.com/blockforest/threejs-dart-facade
